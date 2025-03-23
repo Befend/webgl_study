@@ -7,6 +7,8 @@ import { onMounted } from 'vue'
 onMounted(() => {
   // 获取画布
   const canvas: any = document.querySelector('#canvas')
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
   // 获取三维画笔
   const gl = canvas.getContext('webgl')
   // 指定将要用来清空绘图区的颜色

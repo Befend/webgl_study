@@ -1,15 +1,16 @@
 
 export function useWebgl() {
   // 顶点着色器
-  const Vertext = `
-    void main() {
-        gl_Position = vec4(0.0, 0.0, 0.0, 1.0);
-        gl_PointSize = 100.0;
+  const vertex = `
+    attribute vec4 a_Position;
+    void main(){
+      gl_Position = a_Position;
+      gl_PointSize = 50.0;
     }
   `;
   // 片元着色器
-  const Fragment = `
-    void main() {
+  const fragment = `
+    void main(){
       gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
     }
   `;
@@ -22,7 +23,7 @@ export function useWebgl() {
 
     // 初始化着色器
     // 功能： 解析着色器文本，整合到程序对象里，关联webgl上下文对象，实现两种语言的通信
-    initShader(gl, Vertext, Fragment);
+    initShader(gl, vertex, fragment);
 
     // 声明颜色 rgba
     gl.clearColor(0, 0, 0, 1);
@@ -64,14 +65,4 @@ export function useWebgl() {
   };
 
   return { initWebgl };
-}
-
-export function useCanvas() {
-  const initCanvas = () => {
-    const canvas: any = document.querySelector('#canvas');
-    const ctx = canvas.getContext('2d');
-    ctx.fillStyle = 'red';
-    ctx.fillRect(0, 0, 100, 100);
-  };
-  return { initCanvas };
 }

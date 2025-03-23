@@ -9,6 +9,8 @@ import * as THREE from 'three' // 使用 npm 安装的 three 包
 onMounted(() => {
   // 获取画布
   const canvas: any = document.querySelector('#canvas')
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
   // 获取三维画笔
   const gl = canvas.getContext('webgl')
   // 实例化 Color 对象
