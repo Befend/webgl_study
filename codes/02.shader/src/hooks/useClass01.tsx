@@ -25,6 +25,14 @@ export function useWebgl() {
     // 功能： 解析着色器文本，整合到程序对象里，关联webgl上下文对象，实现两种语言的通信
     initShader(gl, vertex, fragment);
 
+    // 设置attribute变量
+    const a_Position = gl.getAttribLocation(gl.program, 'a_Position');
+
+    // 修改attribute 变量
+    // gl.vertexAttrib1f(a_Position, 0.5);
+    // gl.vertexAttrib2f(a_Position, 0.5, 0.5);
+    gl.vertexAttrib3f(a_Position, 0.0, 0.5, 0.0);
+
     // 声明颜色 rgba
     gl.clearColor(0, 0, 0, 1);
     // 刷底色
