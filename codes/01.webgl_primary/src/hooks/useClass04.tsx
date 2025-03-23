@@ -3,14 +3,14 @@ export function useWebgl() {
   // 顶点着色器
   const Vertext = `
     void main() {
-        gl_Position = vec4(0.0, 0.0, 0.0, 1.0);
-        gl_PointSize = 100.0;
+        gl_Position = vec4(0.1, 0.0, 0.0, 1.0);
+        gl_PointSize = 50.0;
     }
   `;
   // 片元着色器
   const Fragment = `
     void main() {
-      gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+      gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);
     }
   `;
   const initWebgl = () => {
@@ -69,9 +69,11 @@ export function useWebgl() {
 export function useCanvas() {
   const initCanvas = () => {
     const canvas: any = document.querySelector('#canvas');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
     const ctx = canvas.getContext('2d');
     ctx.fillStyle = 'red';
-    ctx.fillRect(0, 0, 100, 100);
+    ctx.fillRect(200, 200, 100, 100);
   };
   return { initCanvas };
 }
