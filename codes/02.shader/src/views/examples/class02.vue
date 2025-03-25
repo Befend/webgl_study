@@ -20,7 +20,7 @@ const vertex = `
 // 片元着色器
 const fragment = `
   void main(){
-    gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+    gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);
   }
 `
 
@@ -50,6 +50,28 @@ function initWebgl() {
 
   // 绘制顶点
   gl.drawArrays(gl.POINTS, 0, 1)
+
+  canvas.addEventListener('click', (event: any) => {
+    // 鼠标点位置
+    const { clientX, clientY } = event
+    const { left, top, width, height } = canvas.getBoundingClientRect()
+
+    const [cssX, cssY] = [clientX - left, clientY - top]
+
+    // 解决坐标原点位置的差异
+    const [halfWidth, halfHeight] = [width / 2, height / 2]
+    const [xBaseCenter, yBaseCenter] = [cssX - halfWidth, cssY - halfHeight]
+    // 解决y方向的差异
+    const yBaseCenterTop = -yBaseCenter
+    // 解决坐标基底的差异
+    const [x, y] = [xBaseCenter / halfWidth, yBaseCenterTop / halfHeight]
+
+    gl.vertexAttrib2f(a_Position, x, y)
+    // 刷底色
+    gl.clear(gl.COLOR_BUFFER_BIT)
+    // 绘制顶点
+    gl.drawArrays(gl.POINTS, 0, 1)
+  })
 }
 
 onMounted(() => {

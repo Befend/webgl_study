@@ -145,3 +145,27 @@ GLSL ES 里函数的命名结构是：<基础函数名><参数个数><参数类�
 - vertexAttrib：基础函数名
 - 3：参数个数，这里的参数个数是要传给变量的参数个数，而不是当前函数的参数个数
 - f：参数类型，f 代表 float 浮点类型，除此之外，还有 i 代表 int 整型，b 代表 bool 布尔类型，v 代表 vec3 向量类型，m 代表 mat4 矩阵类型
+
+# 第二章 用鼠标控制点位
+
+我们要用鼠标控制一个点的位置，那么就要获取鼠标点在 webgl 的坐标系中的位置，也就是鼠标点在 webgl 中的坐标。
+
+## 1. 获取鼠标点在 webgl 的坐标系中的位置
+
+对于鼠标点在 webgl 坐标系中的位置，我们是无法直接获取的。所以我们得先获取鼠标在 canvas 这个 DOM 元素中的位置。
+
+### 1.1 获取鼠标在 canvas 画布中的 css 位置
+
+```js
+canvas.addEventListener("click", function (e) {
+  const { clientX, clientY } = e;
+  const { left, top } = canvas.getBoundingClientRect();
+  const [cssX, cssY] = [clientX - left, clientY - top];
+});
+```
+
+对于 cssX，cssY 的获取，大家应该都不陌生，这在 canvas 2d 也会用到。
+
+我们可以用向量减法来求解。
+
+![alt text](./images/01.png)
